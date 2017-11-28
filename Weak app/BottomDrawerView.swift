@@ -56,7 +56,10 @@ class BottomDrawerView: UIView {
         self.collectionViewWeeksFilter.delegate = self
         self.collectionViewWeeksFilter.dataSource = self
         
+        collectionViewWeeksFilter.isPagingEnabled = true
         self.startDateForWeeks = self.getStartingDate()
+        
+        
         
     }
     
@@ -352,6 +355,7 @@ extension BottomDrawerView: UICollectionViewDelegate, UICollectionViewDataSource
             self.arrOfSelectedWeekFilter.removeAll()
             collectionViewWeeksFilter.reloadData()
             
+            
         } else if collectionView == self.collectionViewWeeksFilter {
             print(self.arrOfWeekFilter[indexPath.item][self.values]!)
             
@@ -359,17 +363,34 @@ extension BottomDrawerView: UICollectionViewDelegate, UICollectionViewDataSource
             self.arrOfSelectedWeekFilter.append(indexPath)
             collectionViewWeeksFilter.reloadData()
         }
+        
+        self.collectionViewWeeksFilter.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
+    
+    
         if collectionView == self.collectionViewWeeks {
             return CGSize(width: 100.0, height: 40.0)
         } else {
-            return CGSize(width: 120.0, height: 40.0)
+            //return CGSize(width: 120.0, height: 40.0)
+            return CGSize(width: ((self.frame.size.width / 3))
+                , height: 40.0)
 
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    
     
     
 }
