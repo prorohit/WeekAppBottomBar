@@ -354,6 +354,10 @@ extension BottomDrawerView: UICollectionViewDelegate, UICollectionViewDataSource
 
             self.arrOfSelectedWeekFilter.removeAll()
             collectionViewWeeksFilter.reloadData()
+        
+            let indexPathOfFirst = IndexPath(item: 0, section: 0)
+            self.collectionViewWeeksFilter.scrollToItem(at: indexPathOfFirst, at: .centeredHorizontally, animated: true)
+
             
             
         } else if collectionView == self.collectionViewWeeksFilter {
@@ -362,9 +366,10 @@ extension BottomDrawerView: UICollectionViewDelegate, UICollectionViewDataSource
             self.arrOfSelectedWeekFilter.removeAll()
             self.arrOfSelectedWeekFilter.append(indexPath)
             collectionViewWeeksFilter.reloadData()
+            self.collectionViewWeeksFilter.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+
         }
         
-        self.collectionViewWeeksFilter.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
